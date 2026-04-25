@@ -15,7 +15,7 @@ export const SectionWrapper = ({ children, idName }: SectionWrapperProps) => (
     initial="hidden"
     whileInView="show"
     viewport={{ once: true, amount: 0.25 }}
-    className={cn(styles.padding, "max-w-7xl mx-auto relative z-0")}
+    className={cn(styles.padding, "w-full px-0 relative z-0")}
   >
     <span className="hash-span" id={idName}>
       &nbsp;

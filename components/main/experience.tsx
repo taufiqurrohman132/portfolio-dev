@@ -1,10 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-// import {
-//   VerticalTimeline,
-//   VerticalTimelineElement,
-// } from "react-vertical-timeline-component";
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 
