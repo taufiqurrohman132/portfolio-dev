@@ -21,7 +21,7 @@ export const MagicButton = ({
     <button
       className={cn(
         "relative inline-flex h-12 w-full overflow-hidden rounded-lg p-[1px] focus:outline-none md:w-60",
-        !asChild && "md:mt-10"
+        !asChild && ""
       )}
       onClick={handleClick}
       tabIndex={asChild ? -1 : undefined}

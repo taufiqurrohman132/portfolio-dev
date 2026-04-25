@@ -386,7 +386,7 @@ export const About = () => {
                   {/* Social Links & CTA */}
                   <motion.div
                     variants={fadeIn("left", "spring", 1, 1)}
-                    className="flex flex-col sm:flex-row items-center gap-4 mt-2"
+                    className="flex flex-col sm:flex-row sm:items-center gap-4 mt-2"
                   >
                     {/* Social Icons */}
                     <div className="flex items-center gap-3">
@@ -398,7 +398,7 @@ export const About = () => {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.15, y: -2 }}
                           whileTap={{ scale: 0.95 }}
-                          className="p-3 rounded-xl bg-white/5 border border-white/10 
+                          className="flex items-center justify-center h-12 w-12 rounded-xl bg-white/5 border border-white/10 
                                      text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-500/30
                                      transition-colors duration-300"
                           aria-label={label}
@@ -409,12 +409,14 @@ export const About = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <MagicButton
-                      title="Download CV"
-                      icon={<FaDownload />}
-                      position="right"
-                      otherClasses="text-sm"
-                    />
+                    <div className="flex items-center">
+                      <MagicButton
+                        title="Download CV"
+                        icon={<FaDownload />}
+                        position="right"
+                        otherClasses="!mt-0 text-sm"
+                      />
+                    </div>
                   </motion.div>
                 </div>
               </div>
