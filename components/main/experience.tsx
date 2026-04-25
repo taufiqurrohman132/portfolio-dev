@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import type { ComponentType } from "react";
+import { useRef, type ComponentType, type MouseEvent } from "react";
 
 type VerticalTimelineElementProps = any; // sementara (biar jalan dulu)
 
@@ -34,46 +34,79 @@ type ExperienceCardProps = {
 };
 
 // Experience Card
-const ExperienceCard = ({ experience }: ExperienceCardProps) => (
-  <VerticalTimelineElement
-    contentStyle={{ background: "#1d1836", color: "#fff", borderRadius: "26px", }}
-    contentArrowStyle={{ borderRight: "7px solid #232631" }}
-    date={experience.date}
-    iconStyle={{ background: experience.iconBg }}
-    icon={
-      <div className="flex justify-center items-center w-full h-full">
-        <img
-          src={experience.icon.src}
-          alt={experience.company_name}
-          className="w-full h-full object-cover rounded-full"
-        />
-      </div>
-    }
-  >
-    {/* Title */}
-    <div>
-      <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-      <p
-        className="text-secondary text-[16px] font-semibold"
-        style={{ margin: 0 }}
-      >
-        {experience.company_name}
-      </p>
-    </div>
+const ExperienceCard = ({ experience }: ExperienceCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
 
-    {/* Experience Points */}
-    <ul className="mt-5 list-disc ml-5 space-y-2">
-      {experience.points.map((point, i) => (
-        <li
-          key={`experience-point-${i}`}
-          className="text-white-100 text-[14px] pl-1 tracking-wider"
-        >
-          {point}
-        </li>
-      ))}
-    </ul>
-  </VerticalTimelineElement>
-);
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty("--mouse-x", `${x}%`);
+    card.style.setProperty("--mouse-y", `${y}%`);
+  };
+
+  return (
+    <VerticalTimelineElement
+      contentStyle={{ color: "#fff", borderRadius: "26px", boxShadow: "none" }}
+      contentArrowStyle={{ borderRight: "7px solid rgba(168, 85, 247, 0.3)" }}
+      date={experience.date}
+      iconStyle={{ background: experience.iconBg }}
+      icon={
+        <div className="flex justify-center items-center w-full h-full">
+          <img
+            src={experience.icon.src}
+            alt={experience.company_name}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      }
+    >
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        whileHover={{ scale: 1.02, y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="relative"
+        tabIndex={0}
+      >
+        {/* Rotating border glow */}
+        <div className="border-glow" aria-hidden="true" />
+        {/* Mouse-following spotlight */}
+        <div className="spotlight-overlay" aria-hidden="true" />
+
+        {/* Title */}
+        <div className="relative z-10">
+          <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-white to-cyan-300 text-[24px] font-bold">
+            {experience.title}
+          </h3>
+          <div className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <p
+              className="text-cyan-300/90 text-[14px] font-semibold"
+              style={{ margin: 0 }}
+            >
+              {experience.company_name}
+            </p>
+          </div>
+        </div>
+
+        {/* Experience Points */}
+        <ul className="mt-5 space-y-3 relative z-10">
+          {experience.points.map((point, i) => (
+            <li
+              key={`experience-point-${i}`}
+              className="flex items-start gap-3 text-white/80 text-[14px] tracking-wider leading-relaxed"
+            >
+              <span className="mt-1.5 min-w-[6px] h-[6px] rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex-shrink-0 shadow-[0_0_6px_rgba(168,85,247,0.5)]" />
+              {point}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </VerticalTimelineElement>
+  );
+};
 
 // Experience
 export const Experience = () => {
