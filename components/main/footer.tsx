@@ -28,9 +28,8 @@ export const Footer = () => {
             </div>
           ))}
         </div>
-
         <div className="mb-[20px] text-[15px] text-center">
-          &copy; John Doe {new Date().getFullYear()} Inc. All rights reserved.
+          &copy; Taufiq R {new Date().getFullYear()} Inc. All rights reserved.
         </div>
       </div>
     </div>

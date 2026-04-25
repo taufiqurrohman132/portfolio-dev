@@ -44,7 +44,8 @@ export const Skills = () => {
         ))}
       </div>
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {BACKEND_SKILL.map((skill, i) => (
+        {/* {
+        BACKEND_SKILL.map((skill, i) => (
           <SkillDataProvider
             key={skill.skill_name}
             src={skill.image}
@@ -53,10 +54,12 @@ export const Skills = () => {
             height={skill.height}
             index={i}
           />
-        ))}
+        )
+        )
+        } */}
       </div>
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {FULLSTACK_SKILL.map((skill, i) => (
+        {/* {FULLSTACK_SKILL.map((skill, i) => (
           <SkillDataProvider
             key={skill.skill_name}
             src={skill.image}
@@ -65,10 +68,10 @@ export const Skills = () => {
             height={skill.height}
             index={i}
           />
-        ))}
+        ))} */}
       </div>
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {OTHER_SKILL.map((skill, i) => (
+        {/* {OTHER_SKILL.map((skill, i) => (
           <SkillDataProvider
             key={skill.skill_name}
             src={skill.image}
@@ -77,7 +80,7 @@ export const Skills = () => {
             height={skill.height}
             index={i}
           />
-        ))}
+        ))} */}
       </div>
 
       <div className="w-full h-full absolute">

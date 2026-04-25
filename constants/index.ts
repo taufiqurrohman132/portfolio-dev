@@ -7,92 +7,50 @@ import {
   RxLinkedinLogo,
 } from "react-icons/rx";
 
-export const SKILL_DATA = [
+import meta from "@/public/company/meta.png";
+import starbucks from "@/public/company/starbucks.png";
+import tesla from "@/public/company/tesla.png";
+import shopify from "@/public/company/shopify.png";
+import idcamp from "@/public/company/idcamp.jpg";
+import tsd from "@/public/company/tsd.jpg";
+
+// Experiences
+// Experiences
+export const EXPERIENCES = [
   {
-    skill_name: "HTML",
-    image: "html.png",
-    width: 80,
-    height: 80,
+    title: "Android Developer Intern",
+    company_name: "PT Teknologi Sunan Drajat",
+    icon: tsd, // Menggunakan icon android sebagai placeholder profesional
+    iconBg: "#E6DEDD",
+    date: "Jan 2026 – Mar 2026",
+    points: [
+      "Built a real-time network latency monitoring system (update every 5s) to improve network diagnostics.",
+      "Designed local persistence using Room Database, supporting dynamic CRUD of monitored endpoints.",
+      "Refactored the application using MVVM architecture, significantly improving scalability and code maintainability.",
+      "Implemented Firebase Remote Config, FCM, and SSL Pinning to increase app security and configuration flexibility.",
+    ],
   },
   {
-    skill_name: "CSS",
-    image: "css.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "JavaScript",
-    image: "js.png",
-    width: 65,
-    height: 65,
-  },
-  {
-    skill_name: "Tailwind CSS",
-    image: "tailwind.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "React",
-    image: "react.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Redux",
-    image: "redux.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "React Query",
-    image: "reactquery.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "TypeScript",
-    image: "ts.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Next.js 14",
-    image: "next.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Framer Motion",
-    image: "framer.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Stripe",
-    image: "stripe.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Node.js",
-    image: "node.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "MongoDB",
-    image: "mongodb.png",
-    width: 40,
-    height: 40,
+    title: "Android Developer (Scholarship Recipient)",
+    company_name: "IDCamp by Dicoding Indonesia",
+    icon: idcamp, // Menggunakan icon kotlin
+    iconBg: "#383E56",
+    date: "Sep 2024 – Sep 2025",
+    points: [
+      "Developed a full-featured Social Story app implementing 10+ core requirements, earning a perfect 5-star rating.",
+      "Architected an offline-first story feed using Paging 3 with RemoteMediator and Room database cache.",
+      "Optimized event discovery application data retrieval by 52% through efficient Retrofit integration and local caching.",
+      "Implemented comprehensive testing including Unit Tests and UI Testing (Espresso) to ensure high-quality code delivery.",
+    ],
   },
 ] as const;
+
 
 export const SOCIALS = [
   {
     name: "Instagram",
     icon: RxInstagramLogo,
-    link: "https://instagram.com",
+    link: "https://instagram.com/taufiqurrohman.tr",
   },
   {
     name: "Facebook",
@@ -105,156 +63,207 @@ export const SOCIALS = [
     link: "https://twitter.com",
   },
 ] as const;
+export const SKILL_DATA = [
+  {
+    skill_name: "Kotlin",
+    image: "/mobile/kotlin.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Android",
+    image: "/mobile/android.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Jetpack Compose",
+    image: "/mobile/jetpack-compose-logo.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Android Studio",
+    image: "/mobile/android-studio-icon.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Firebase",
+    image: "/mobile/firebase.svg",
+    width: 75,
+    height: 75,
+  },
+  {
+    skill_name: "MySQL",
+    image: "/mobile/MySQL.svg",
+    width: 75,
+    height: 75,
+  },
+  {
+    skill_name: "JUnit",
+    image: "/mobile/JUnit.svg",
+    width: 75,
+    height: 75,
+  },
+] as const;
 
 export const FRONTEND_SKILL = [
   {
-    skill_name: "HTML",
-    image: "html.png",
+    skill_name: "Material Design",
+    image: "/mobile/Material_Design.svg",
     width: 80,
     height: 80,
   },
   {
-    skill_name: "CSS",
-    image: "css.png",
-    width: 80,
-    height: 80,
+    skill_name: "Figma",
+    image: "/mobile/Figma.svg",
+    width: 50,
+    height: 50,
   },
   {
-    skill_name: "JavaScript",
-    image: "js.png",
-    width: 65,
-    height: 65,
+    skill_name: "Dart",
+    image: "/mobile/Dart.svg",
+    width: 70,
+    height: 70,
   },
   {
-    skill_name: "Tailwind CSS",
-    image: "tailwind.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Material UI",
-    image: "mui.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "React",
-    image: "react.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Redux",
-    image: "redux.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "React Query",
-    image: "reactquery.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "TypeScript",
-    image: "ts.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Next.js 14",
-    image: "next.png",
-    width: 80,
-    height: 80,
+    skill_name: "Flutter",
+    image: "/mobile/Flutter.svg",
+    width: 70,
+    height: 70,
   },
 ] as const;
 
 export const BACKEND_SKILL = [
-  {
-    skill_name: "Node.js",
-    image: "node.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Express.js",
-    image: "express.png",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "MongoDB",
-    image: "mongodb.png",
-    width: 40,
-    height: 40,
-  },
-  {
-    skill_name: "Firebase",
-    image: "firebase.png",
-    width: 55,
-    height: 55,
-  },
-  {
-    skill_name: "PostgreSQL",
-    image: "postgresql.png",
-    width: 70,
-    height: 70,
-  },
-  {
-    skill_name: "MySQL",
-    image: "mysql.png",
-    width: 70,
-    height: 70,
-  },
-  {
-    skill_name: "Prisma",
-    image: "prisma.png",
-    width: 70,
-    height: 70,
-  },
-  {
-    skill_name: "Graphql",
-    image: "graphql.png",
-    width: 80,
-    height: 80,
-  },
 ] as const;
 
 export const FULLSTACK_SKILL = [
-  {
-    skill_name: "React Native",
-    image: "reactnative.png",
-    width: 70,
-    height: 70,
-  },
-  {
-    skill_name: "Tauri",
-    image: "tauri.png",
-    width: 70,
-    height: 70,
-  },
-  {
-    skill_name: "Docker",
-    image: "docker.png",
-    width: 70,
-    height: 70,
-  },
-
-  {
-    skill_name: "Figma",
-    image: "figma.png",
-    width: 50,
-    height: 50,
-  },
 ] as const;
 
 export const OTHER_SKILL = [
+] as const;
+
+
+export const gridItems = [
   {
-    skill_name: "Go",
-    image: "go.png",
-    width: 60,
-    height: 60,
+    id: 1,
+    title: "I prioritize client collaboration, fostering open communication ",
+    description: "",
+    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
+    imgClassName: "w-full h-full",
+    titleClassName: "justify-end",
+    img: "/b1.svg",
+    spareImg: "",
   },
+  {
+    id: 2,
+    title: "I'm very flexible with time zone communications",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 3,
+    title: "My tech stack",
+    description: "I constantly try to improve",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-center",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 4,
+    title: "Tech enthusiast with a passion for development.",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "/grid.svg",
+    spareImg: "/b4.svg",
+  },
+
+  {
+    id: 5,
+    title: "Currently building a JS Animation library",
+    description: "The Inside Scoop",
+    className: "md:col-span-3 md:row-span-2",
+    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
+    titleClassName: "justify-center md:justify-start lg:justify-center",
+    img: "/b5.svg",
+    spareImg: "/grid.svg",
+  },
+  {
+    id: 6,
+    title: "Do you want to start a project together?",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+    img: "",
+    spareImg: "",
+  },
+] as const;
+
+export const RECENT_PROJECTS = [
+  {
+    id: 1,
+    title: "Social Story App - Android",
+    des: "A full-featured social media Android app with offline-first architecture, geolocation, and modern Android development practices.",
+    img: "/projects/p-sosial-story.png",
+    iconLists: [
+      "/skills/mobile/kotlin.svg",
+      "/skills/mobile/android.svg",
+      "/skills/mobile/JUnit.svg",
+      "/skills/mobile/glide.png",
+    ],
+    link: "https://github.com/taufiqurrohman132/story-android",
+    sourceCode: "https://github.com/taufiqurrohman132/story-android",
+  },
+  {
+    id: 2,
+    title: "Fintrack - Personal Finance App",
+    des: "A personal finance tracking app with transaction management, categories, and analytics built using MVVM architecture.",
+    img: "/projects/fintrack.png",
+    iconLists: [
+      "/skills/kotlin.png",
+      "/skills/room.png",
+      "/skills/datastore.png",
+      "/skills/hilt.png",
+      "/skills/android.png"
+    ],
+    link: "https://github.com/taufiqurrohman132/finance-tracker-android",
+    sourceCode: "https://github.com/taufiqurrohman132/finance-tracker-android",
+  },
+  {
+    id: 3,
+    title: "Event Discovery App",
+    des: "An Android app for discovering events with real-time search, favorites, and optimized data loading using caching.",
+    img: "/projects/p-event-dicoding.png",
+    iconLists: [
+      "/skills/mobile/kotlin.svg",
+      "/skills/mobile/glide.png",
+     ],
+    link: "https://github.com/taufiqurrohman132/dicoding-event-android",
+    sourceCode: "https://github.com/taufiqurrohman132/dicoding-event-android",
+  },
+  {
+    id: 4,
+    title: "Tasky Note – Aplikasi Todolist App",
+    des: "A simple mobile application that presents a to-do list in an interactive list format. This application was developed to fulfill the final submission for the Creating Flutter Apps for Beginners class and also serves as an initial portfolio for an entry-level mobile developer position.",
+    img: "/projects/p-todo.png",
+    iconLists: [
+      "/skills/mobile/Dart.svg",
+      "/skills/mobile/Flutter.svg",
+     ],
+    link: "https://github.com/taufiqurrohman132/tasky-note-flutter",
+    sourceCode: "https://github.com/taufiqurrohman132/tasky-note-flutter",
+  },
+
 ] as const;
 
 export const PROJECTS = [
@@ -293,7 +302,7 @@ export const FOOTER_DATA = [
       {
         name: "GitHub",
         icon: RxGithubLogo,
-        link: "https://github.com",
+        link: "https://github.com/taufiqurrohman132",
       },
       {
         name: "Discord",
@@ -308,7 +317,7 @@ export const FOOTER_DATA = [
       {
         name: "Instagram",
         icon: RxInstagramLogo,
-        link: "https://instagram.com",
+        link: "https://instagram.com/taufiqurrohman.tr",
       },
       {
         name: "Twitter",
@@ -318,7 +327,7 @@ export const FOOTER_DATA = [
       {
         name: "Linkedin",
         icon: RxLinkedinLogo,
-        link: "https://linkedin.com",
+        link: "https://linkedin.com/in/taufiqurrohman132",
       },
     ],
   },
@@ -338,7 +347,7 @@ export const FOOTER_DATA = [
       {
         name: "Contact Me",
         icon: null,
-        link: "mailto:contact@example.com",
+        link: "mailto:taufiqurrohman132132@gmail.com",
       },
     ],
   },

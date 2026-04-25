@@ -66,3 +66,28 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+
+@layer utilities {
+  .heading {
+    @apply text-center text-4xl font-bold md:text-5xl;
+  }
+
+  .black-gradient {
+    background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
+  }
+}
+
+/* EXPERIENCE CARD CUSTOMIZATION */
+.vertical-timeline::before {
+  background: linear-gradient(to bottom, #a855f7, #06b6d4) !important;
+  width: 3px;
+}
+
+.vertical-timeline-element-icon {
+  background: #1d1836 !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.8),
+              0 0 0 6px rgba(6, 182, 212, 0.3) !important;
+}
+
