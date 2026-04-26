@@ -13,17 +13,29 @@ import Link from "next/link";
 import { MagicButton } from "../ui/magic-button";
 import { FaLocationArrow } from "react-icons/fa6";
 
-export const HeroContent = () => {
+interface HeroContentProps {
+  isMobile?: boolean;
+}
+
+export const HeroContent = ({ isMobile = false }: HeroContentProps) => {
+  // Stagger delays: wider spacing to reduce simultaneous animations
+  const delayTop = isMobile ? 0.1 : 0.3;
+  const delayHeading = isMobile ? 0.25 : 0.6;
+  const delayCta = isMobile ? 0.4 : 0.9;
+  const delayImage = isMobile ? 0 : 1.1;
+
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      className="flex flex-row items-center justify-center px-20 mt-40 w-full z-[20]"
+      className="flex flex-col md:flex-row items-center justify-center px-6 md:px-20 mt-28 md:mt-40 w-full z-[20]"
     >
       <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
+        {/* Welcome Box */}
         <motion.div
           variants={slideInFromTop}
-          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]]"
+          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+          style={{ willChange: "transform, opacity" }}
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
           <h1 className="Welcome-text text-[13px]">
@@ -31,9 +43,11 @@ export const HeroContent = () => {
           </h1>
         </motion.div>
 
+        {/* Heading */}
         <motion.div
-          variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-6 mt-6 text-6xl text-bold text-white max-w-[600px] w-auto h-auto"
+          variants={slideInFromLeft(delayHeading)}
+          className="flex flex-col gap-6 mt-6 text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
+          style={{ willChange: "transform, opacity" }}
         >
           <span>
             Building scalable{" "}
@@ -44,8 +58,12 @@ export const HeroContent = () => {
           </span>
         </motion.div>
 
-        <motion.div variants={slideInFromLeft(1)}>
-          <Link href="#projects" className="md:mt-10">
+        {/* CTA */}
+        <motion.div
+          variants={slideInFromLeft(delayCta)}
+          style={{ willChange: "transform, opacity" }}
+        >
+          <Link href="#projects" className="md:mt-10 inline-block">
             <MagicButton
               title="Show my work"
               icon={<FaLocationArrow />}
@@ -56,19 +74,25 @@ export const HeroContent = () => {
         </motion.div>
       </div>
 
-      <motion.div
-        variants={slideInFromRight(0.8)}
-        className="w-full h-full flex justify-center items-center"
-      >
-        <Image
-          src="/hero-bg.svg"
-          alt="work icons"
-          height={650}
-          width={650}
-          draggable={false}
-          className="select-none"
-        />
-      </motion.div>
+      {/* Desktop only: SVG illustration with lazy loading */}
+      {!isMobile && (
+        <motion.div
+          variants={slideInFromRight(delayImage)}
+          className="w-full h-full hidden md:flex justify-center items-center"
+          style={{ willChange: "transform, opacity" }}
+        >
+          <Image
+            src="/hero-bg.svg"
+            alt="work icons"
+            height={650}
+            width={650}
+            draggable={false}
+            className="select-none"
+            loading="lazy"
+            priority={false}
+          />
+        </motion.div>
+      )}
     </motion.div>
   );
 };
