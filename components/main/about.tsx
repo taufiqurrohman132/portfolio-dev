@@ -93,22 +93,19 @@ const TiltCard = ({ children }: { children: React.ReactNode }) => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // On mobile, render without tilt to save GPU
-  if (isMobile) {
-    return <div className="relative">{children}</div>;
-  }
-
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Reduced stiffness for smoother, less CPU-intensive animation
   const mouseX = useSpring(x, { stiffness: 150, damping: 20 });
   const mouseY = useSpring(y, { stiffness: 150, damping: 20 });
 
   const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"]);
   const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]);
 
+  if (isMobile) {
+    return <div className="relative">{children}</div>;
+  }
+  
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
