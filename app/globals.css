@@ -67,8 +67,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
 @layer utilities {
   .heading {
     @apply text-center text-4xl font-bold md:text-5xl;
@@ -481,4 +479,14 @@ html {
     inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
+/* Holographic animation */
+@keyframes holographic {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 
+/* Shine animation for image */
+@keyframes shine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

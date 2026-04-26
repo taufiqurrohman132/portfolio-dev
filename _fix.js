@@ -1,0 +1,1 @@
+const fs=require(s); fs.writeFileSync(components/sub/certificate-card.tsx, 	est); console.log(ok);
