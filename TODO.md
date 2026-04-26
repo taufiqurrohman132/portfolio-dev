@@ -1,43 +1,43 @@
-# TODO: Premium Focus Animation for Experience Cards
+# Performance Optimization TODO
 
-## Plan Overview
-Enhance the experience cards with a more premium focus/hover animation including mouse-following spotlight, rotating border gradient, enhanced transforms, and staggered glow effects.
+## Phase 1: Global CSS & Layout Optimizations ✅
+- [x] Optimize `app/globals.css` - Add GPU helpers, reduce-motion media query, content-visibility
+- [x] Optimize `app/layout.tsx` - Add antialiased class for smoother text rendering
 
-## Steps
+## Phase 2: Heavy Animation Components ✅
+- [x] Optimize `components/main/star-background.tsx` - Already had particle reduction (1200/600)
+- [x] Optimize `components/main/about.tsx` - Disable 3D tilt on mobile, reduce blur, fix video preload
+- [x] Optimize `components/ui/3d-pin.tsx` - Replace 3 infinite motion loops with single CSS animation
 
-### Step 1: Update `app/globals.css`
-- [x] Add mouse-following spotlight effect styles (`--mouse-x`, `--mouse-y` custom properties)
-- [x] Add rotating conic gradient border animation on hover/focus
-- [x] Enhance hover transform (scale 1.02 + spring lift)
-- [x] Add staggered content glow for bullet points on hover
-- [x] Add focus-visible ring for keyboard accessibility
-- [x] Enhance background glow orb intensity on hover
-- [x] Add new keyframe animations (`@keyframes rotate-border`, `@keyframes pulse-premium`)
+## Phase 3: Interactive Components ✅
+- [x] Optimize `components/sub/certificate-card.tsx` - Debounce mouse handlers, remove heavy effects
+- [x] Optimize `components/main/experience.tsx` - Replace spring hover with CSS, throttle mouse move
 
-### Step 2: Update `components/main/experience.tsx`
-- [x] Add `useRef` and `useState` for mouse position tracking
-- [x] Create `handleMouseMove` handler to update CSS custom properties (`--mouse-x`, `--mouse-y`)
-- [x] Wrap `VerticalTimelineElement` content with mouse event handlers
-- [x] Add Framer Motion `whileHover` / `whileFocus` variants for spring animation
-- [x] Ensure smooth cleanup on unmount
+## Phase 4: Video & Media ✅
+- [x] Optimize `components/main/hero.tsx` - Fix preload="metadata", add playsInline
+- [x] Optimize `components/main/skills.tsx` - Fix video preload, add gpu-layer
+- [x] Optimize `components/main/about.tsx` - Fix video preload
 
-### Step 3: Testing & Verification
-- [ ] Verify hover spotlight follows cursor smoothly
-- [ ] Verify rotating border appears on hover/focus
-- [ ] Check staggered bullet point glow
-- [ ] Test keyboard focus-visible states
-- [ ] Confirm responsive behavior on mobile/tablet
-- [ ] Ensure no performance issues (60fps)
+## Phase 5: Motion Utilities ✅
+- [x] Optimize `src/utils/motion.ts` - Prefer tween over spring, respect reduced-motion
 
-## Dependencies
-- No new packages required (Framer Motion already installed)
-- Uses existing `react-vertical-timeline-component` CSS overrides
+## Phase 6: Testing & Polish ⏳
+- [ ] Run build to verify no errors
+- [ ] Test scroll smoothness
+- [ ] Verify mobile performance
 
-## Expected Result
-Experience cards will have a luxurious, interactive feel with:
-1. Dynamic spotlight following the mouse cursor
-2. Animated rotating gradient border on hover
-3. Smooth spring-based lift + scale transform
-4. Bullet points that glow in sequence when card is focused
-5. Strong focus-visible indicator for accessibility
+## Summary of Changes
+
+### Performance Improvements:
+1. **GPU Layering**: Added `.gpu-layer` class with `translateZ(0)` and `will-change` for composited layers
+2. **Reduced Motion**: Added `prefers-reduced-motion` media query support
+3. **Mobile Optimizations**: Disabled heavy blur/glow effects on mobile (<768px)
+4. **Video Preload**: Fixed invalid `preload="false"` to `preload="metadata"`
+5. **3D Tilt**: Disabled on mobile (window width < 1024), reduced stiffness on desktop
+6. **Mouse Handlers**: Added requestAnimationFrame throttling to certificate and experience cards
+7. **Backdrop Blur**: Reduced from `blur-2xl`/`blur-[120px]` to `blur-[80px]`/`blur-[100px]`
+8. **Framer Motion**: Replaced heavy spring animations with lighter tween animations
+9. **3D Pin**: Replaced 3 infinite framer-motion loops with single CSS `pulse-slow` animation
+10. **Experience Cards**: Replaced spring whileHover with CSS transitions
+11. **Certificate Cards**: Removed expensive SVG noise filter, reduced backdrop-blur layers
 

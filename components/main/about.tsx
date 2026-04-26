@@ -83,16 +83,31 @@ const SkillTag = ({ name, delay }: { name: string; delay: number }) => (
   </motion.span>
 );
 
-// 3D Tilt Card Component
+// 3D Tilt Card Component - disabled on mobile for performance
 const TiltCard = ({ children }: { children: React.ReactNode }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // On mobile, render without tilt to save GPU
+  if (isMobile) {
+    return <div className="relative">{children}</div>;
+  }
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseX = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseY = useSpring(y, { stiffness: 300, damping: 30 });
+  // Reduced stiffness for smoother, less CPU-intensive animation
+  const mouseX = useSpring(x, { stiffness: 150, damping: 20 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 20 });
 
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-8deg", "8deg"]);
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -196,8 +211,8 @@ export const About = () => {
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
           <video
-            className="w-full h-full object-cover opacity-20"
-            preload="false"
+            className="w-full h-full object-cover opacity-20 gpu-layer"
+            preload="metadata"
             playsInline
             loop
             muted
@@ -427,10 +442,10 @@ export const About = () => {
             </div>
           </TiltCard>
 
-          {/* Background decorative glows */}
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[150px] pointer-events-none" />
+          {/* Background decorative glows - reduced blur for performance */}
+          <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none gpu-layer" />
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none gpu-layer" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[100px] pointer-events-none gpu-layer hidden md:block" />
         </motion.div>
       </>
     </SectionWrapper>

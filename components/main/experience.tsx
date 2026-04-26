@@ -36,15 +36,27 @@ type ExperienceCardProps = {
 // Experience Card
 const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty("--mouse-x", `${x}%`);
-    card.style.setProperty("--mouse-y", `${y}%`);
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      const card = cardRef.current;
+      if (!card) { rafRef.current = 0; return; }
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mouse-x", `${x}%`);
+      card.style.setProperty("--mouse-y", `${y}%`);
+      rafRef.current = 0;
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    }
   };
 
   return (
@@ -63,12 +75,11 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
         </div>
       }
     >
-      <motion.div
+      <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        whileHover={{ scale: 1.02, y: -4 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="relative"
+        onMouseLeave={handleMouseLeave}
+        className="relative experience-card-content gpu-layer"
         tabIndex={0}
       >
         {/* Rotating border glow */}
@@ -81,7 +92,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
           <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-white to-cyan-300 text-[24px] font-bold">
             {experience.title}
           </h3>
-          <div className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+          <div className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
             <p
               className="text-cyan-300/90 text-[14px] font-semibold"
               style={{ margin: 0 }}
@@ -98,12 +109,12 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
               key={`experience-point-${i}`}
               className="flex items-start gap-3 text-white/80 text-[14px] tracking-wider leading-relaxed"
             >
-              <span className="mt-1.5 min-w-[6px] h-[6px] rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex-shrink-0 shadow-[0_0_6px_rgba(168,85,247,0.5)]" />
+              <span className="mt-1.5 min-w-[6px] h-[6px] rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex-shrink-0" />
               {point}
             </li>
           ))}
         </ul>
-      </motion.div>
+      </div>
     </VerticalTimelineElement>
   );
 };

@@ -1,25 +1,31 @@
 import type { Variants } from "framer-motion";
 
-// Text Variant motion
+// Check for reduced motion preference
+const prefersReducedMotion = typeof window !== "undefined"
+  ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  : false;
+
+// Text Variant motion - using tween for smoother performance
 export const textVariant = (delay?: number): Variants => {
   return {
     hidden: {
-      y: -50,
+      y: -30,
       opacity: 0,
     },
     show: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
-        duration: 1.25,
+        type: "tween",
+        duration: prefersReducedMotion ? 0.3 : 0.8,
         delay: delay,
+        ease: "easeOut",
       },
     },
   };
 };
 
-// FadeIn motion
+// FadeIn motion - defaults to tween for better performance
 export const fadeIn = (
   direction: "left" | "right" | "up" | "down" | undefined,
   type: "decay" | "spring" | "keyframes" | "tween" | "inertia" | undefined,
@@ -28,8 +34,8 @@ export const fadeIn = (
 ): Variants => {
   return {
     hidden: {
-      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+      x: direction === "left" ? 60 : direction === "right" ? -60 : 0,
+      y: direction === "up" ? 60 : direction === "down" ? -60 : 0,
       opacity: 0,
     },
     show: {
@@ -37,9 +43,9 @@ export const fadeIn = (
       y: 0,
       opacity: 1,
       transition: {
-        type: type,
+        type: type === "spring" ? "tween" : type,
         delay: delay,
-        duration: duration,
+        duration: prefersReducedMotion ? 0.3 : duration,
         ease: "easeOut",
       },
     },
@@ -50,7 +56,7 @@ export const fadeIn = (
 export const zoomIn = (delay: number, duration: number): Variants => {
   return {
     hidden: {
-      scale: 0,
+      scale: 0.9,
       opacity: 0,
     },
     show: {
@@ -59,7 +65,7 @@ export const zoomIn = (delay: number, duration: number): Variants => {
       transition: {
         type: "tween",
         delay: delay,
-        duration: duration,
+        duration: prefersReducedMotion ? 0.3 : duration,
         ease: "easeOut",
       },
     },
@@ -82,9 +88,9 @@ export const slideIn = (
       x: 0,
       y: 0,
       transition: {
-        type: type,
+        type: type === "spring" ? "tween" : type,
         delay: delay,
-        duration: duration,
+        duration: prefersReducedMotion ? 0.3 : duration,
         ease: "easeOut",
       },
     },
@@ -100,7 +106,7 @@ export const staggerContainer = (
     hidden: {},
     show: {
       transition: {
-        staggerChildren: staggerChildren,
+        staggerChildren: prefersReducedMotion ? 0.05 : staggerChildren,
         delayChildren: delayChildren || 0,
       },
     },

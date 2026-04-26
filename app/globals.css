@@ -67,6 +67,51 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration helpers */
+.gpu-layer {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Content visibility for off-screen sections */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Reduce paint area for fixed backgrounds */
+.contain-paint {
+  contain: paint;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile optimizations - disable heavy effects */
+@media (max-width: 768px) {
+  .vertical-timeline-element-content::after {
+    display: none !important;
+  }
+  
+  .vertical-timeline-element-content .border-glow {
+    display: none !important;
+  }
+}
+
 @layer utilities {
   .heading {
     @apply text-center text-4xl font-bold md:text-5xl;
@@ -479,7 +524,14 @@ html {
     inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Holographic animation */
+/* Experience card hover - replaces framer motion whileHover */
+.experience-card-content {
+  transition: transform 0.3s ease-out;
+}
+
+.experience-card-content:hover {
+  transform: translateY(-4px) scale(1.01);
+}
 @keyframes holographic {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -489,4 +541,14 @@ html {
 @keyframes shine {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Slow pulse for 3D pin - GPU-friendly */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.95); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
 }
