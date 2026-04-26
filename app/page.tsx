@@ -1,4 +1,5 @@
 import { About } from "@/components/main/about";
+import { Certificates } from "@/components/main/certificates";
 import { Encryption } from "@/components/main/encryption";
 import { Experience } from "@/components/main/experience";
 import { Hero } from "@/components/main/hero";
@@ -16,6 +17,7 @@ export default function Home() {
         {/* <Encryption /> */}
         <Experience />
         <RecentProjects />
+        <Certificates />
         {/* <Projects /> */}
       </div>
     </main>

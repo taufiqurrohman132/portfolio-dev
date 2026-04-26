@@ -353,6 +353,75 @@ export const FOOTER_DATA = [
   },
 ] as const;
 
+export const CERTIFICATES = [
+  {
+    id: 1,
+    title: "Belajar Pengembangan Aplikasi Android Intermediate",
+    issuer: "Dicoding Indonesia",
+    date: "Mar 2025",
+    credentialId: "EYX425712J",
+    link: "https://www.dicoding.com/certificates/EYX425712J",
+    tags: ["Android", "Kotlin", "MVVM", "Retrofit"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+  {
+    id: 2,
+    title: "Belajar Fundamental Aplikasi Android",
+    issuer: "Dicoding Indonesia",
+    date: "Feb 2025",
+    credentialId: "EYX4128NJP",
+    link: "https://www.dicoding.com/certificates/EYX4128NJP",
+    tags: ["Android", "Kotlin", "Architecture Component"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+  {
+    id: 3,
+    title: "Memulai Pemrograman dengan Kotlin",
+    issuer: "Dicoding Indonesia",
+    date: "Jan 2025",
+    credentialId: "JLX4234NJP",
+    link: "https://www.dicoding.com/certificates/JLX4234NJP",
+    tags: ["Kotlin", "OOP", "Functional Programming"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+  {
+    id: 4,
+    title: "Belajar Prinsip Pemrograman SOLID",
+    issuer: "Dicoding Indonesia",
+    date: "Dec 2024",
+    credentialId: "6RPNWV449Z",
+    link: "https://www.dicoding.com/certificates/6RPNWV449Z",
+    tags: ["SOLID", "Clean Code", "Design Patterns"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+  {
+    id: 5,
+    title: "Belajar Dasar Git dengan GitHub",
+    issuer: "Dicoding Indonesia",
+    date: "Nov 2024",
+    credentialId: "JLX4137NJP",
+    link: "https://www.dicoding.com/certificates/JLX4137NJP",
+    tags: ["Git", "GitHub", "Version Control"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+  {
+    id: 6,
+    title: "Memulai Pemrograman dengan Dart",
+    issuer: "Dicoding Indonesia",
+    date: "Oct 2024",
+    credentialId: "MRZM48QEQXYQ",
+    link: "https://www.dicoding.com/certificates/MRZM48QEQXYQ",
+    tags: ["Dart", "Flutter", "Mobile"],
+    icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
+  },
+] as const;
+
 export const NAV_LINKS = [
   {
     title: "About me",
@@ -365,6 +434,10 @@ export const NAV_LINKS = [
   {
     title: "Projects",
     link: "#projects",
+  },
+  {
+    title: "Certificates",
+    link: "#certificates",
   },
 ] as const;
 
