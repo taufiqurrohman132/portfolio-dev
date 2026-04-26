@@ -255,28 +255,28 @@ export const About = () => {
                     <OrbitingIcon
                       src="/skills/mobile/kotlin.svg"
                       size={32}
-                      orbitRadius={140}
+                      orbitRadius={220}
                       duration={12}
                       delay={0}
                     />
                     <OrbitingIcon
                       src="/skills/mobile/android.svg"
                       size={28}
-                      orbitRadius={160}
+                      orbitRadius={210}
                       duration={15}
                       delay={2}
                     />
                     <OrbitingIcon
                       src="/skills/mobile/Flutter.svg"
                       size={26}
-                      orbitRadius={130}
+                      orbitRadius={200}
                       duration={10}
                       delay={4}
                     />
                     <OrbitingIcon
                       src="/skills/mobile/firebase.svg"
                       size={24}
-                      orbitRadius={175}
+                      orbitRadius={235}
                       duration={18}
                       delay={1}
                     />
@@ -284,16 +284,20 @@ export const About = () => {
                     {/* Animated rotating gradient border */}
                     <div className="absolute inset-0 p-[3px] rounded-[2rem]">
                       <div
-                        className="absolute inset-0 rounded-[2rem] opacity-80"
+                        className="absolute inset-0 rounded-[2rem] p-[3px]"
                         style={{
                           background:
-                            "conic-gradient(from 0deg, #a855f7, #06b6d4, #8b5cf6, #e879f9, #a855f7)",
-                          animation: "spin 6s linear infinite",
+                            "conic-gradient(from 0deg, #a855f7, #06b6d4, #8b5cf6, #06b6d4, #a855f7)",
+                          animation: "spin 4s linear infinite",
+                          WebkitMask:
+                            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                          WebkitMaskComposite: "xor",
+                          maskComposite: "exclude",
                         }}
                       />
                       <div className="relative w-full h-full rounded-[calc(2rem-3px)] overflow-hidden bg-[#0a0a1a]">
                         <Image
-                          src="/profile.png"
+                          src="/profile/profile.png"
                           alt="Profile Photo"
                           fill
                           className="object-cover"
@@ -335,7 +339,7 @@ export const About = () => {
                     variants={fadeIn("left", "spring", 0.4, 1)}
                     className="space-y-2"
                   >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-400 to-cyan-400">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-400 to-cyan-400">
                       Taufiqurrohman
                     </h2>
                     <div className="flex items-center justify-center lg:justify-start gap-3">
