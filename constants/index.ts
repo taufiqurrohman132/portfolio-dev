@@ -363,6 +363,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/EYX425712J",
     tags: ["Android", "Kotlin", "MVVM", "Retrofit"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
   {
     id: 2,
@@ -373,6 +374,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/EYX4128NJP",
     tags: ["Android", "Kotlin", "Architecture Component"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
   {
     id: 3,
@@ -383,6 +385,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/JLX4234NJP",
     tags: ["Kotlin", "OOP", "Functional Programming"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
   {
     id: 4,
@@ -393,6 +396,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/6RPNWV449Z",
     tags: ["SOLID", "Clean Code", "Design Patterns"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
   {
     id: 5,
@@ -403,6 +407,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/JLX4137NJP",
     tags: ["Git", "GitHub", "Version Control"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
   {
     id: 6,
@@ -413,6 +418,7 @@ export const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/MRZM48QEQXYQ",
     tags: ["Dart", "Flutter", "Mobile"],
     icon: "/company/idcamp.jpg",
+    image: "/company/idcamp.jpg",
   },
 ] as const;
 

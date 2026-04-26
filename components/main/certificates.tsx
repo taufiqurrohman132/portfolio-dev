@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaExternalLinkAlt, FaAward } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { useRef, type MouseEvent } from "react";
 
 import { CERTIFICATES } from "@/constants";
 import { SectionWrapper } from "@/src/hoc";
@@ -12,7 +13,6 @@ export const Certificates = () => {
   return (
     <SectionWrapper idName="certificates">
       <section className="py-20">
-        {/* Title */}
         <motion.div variants={textVariant()}>
           <h1 className="heading text-white">
             My Professional{" "}
@@ -22,104 +22,115 @@ export const Certificates = () => {
           </h1>
         </motion.div>
 
-        {/* Certificates Grid */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
           {CERTIFICATES.map((cert, index) => (
-            <motion.a
-              key={cert.id}
-              href={cert.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1,
-                ease: "easeOut",
-              }}
-              whileHover={{ scale: 1.03, y: -4 }}
-              className="group relative block"
-            >
-              {/* Card */}
-              <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-br from-[#1a1635] to-[#120e2a] border border-white/[0.06] p-6 h-full transition-all duration-400">
-                {/* Top gradient accent bar */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 opacity-60" />
-
-                {/* Glow orb */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-purple-500/5 group-hover:bg-purple-500/10 transition-all duration-500" />
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Header with icon and date */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]">
-                        <Image
-                          src={cert.icon}
-                          alt={cert.issuer}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <p className="text-purple-300/90 text-sm font-semibold">
-                          {cert.issuer}
-                        </p>
-                        <p className="text-white/50 text-xs">{cert.date}</p>
-                      </div>
-                    </div>
-                    <motion.div
-                      whileHover={{ rotate: 15 }}
-                      className="text-purple-400/60 group-hover:text-purple-400 transition-colors"
-                    >
-                      <FaAward className="w-5 h-5" />
-                    </motion.div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-cyan-300 transition-all duration-300">
-                    {cert.title}
-                  </h3>
-
-                  {/* Credential ID */}
-                  <p className="text-white/40 text-xs mb-4 font-mono">
-                    ID: {cert.credentialId}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {cert.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-cyan-300/80 group-hover:bg-purple-500/10 group-hover:border-purple-500/30 group-hover:text-purple-300 transition-all duration-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Hover indicator */}
-                  <div className="mt-4 flex items-center gap-2 text-purple-400/0 group-hover:text-purple-400/70 transition-all duration-400">
-                    <span className="text-xs font-medium">Verify Certificate</span>
-                    <FaExternalLinkAlt className="w-3 h-3" />
-                  </div>
-                </div>
-              </div>
-            </motion.a>
+            <CertificateItem key={cert.id} cert={cert} index={index} />
           ))}
         </div>
-
-        {/* Bottom decoration */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mt-16 h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent max-w-lg mx-auto"
-        />
       </section>
     </SectionWrapper>
   );
 };
+
+function CertificateItem({
+  cert,
+  index,
+}: {
+  cert: (typeof CERTIFICATES)[number];
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty("--mouse-x", `${x}%`);
+    card.style.setProperty("--mouse-y", `${y}%`);
+  };
+
+  return (
+    <motion.a
+      href={cert.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.1,
+        ease: "easeOut",
+      }}
+      className="group relative block"
+    >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="certificate-card h-full flex flex-col"
+      >
+        <div className="border-glow" aria-hidden="true" />
+        <div className="spotlight-overlay" aria-hidden="true" />
+
+        <div className="relative z-10 p-5 pb-0">
+          <div className="cert-image-wrap relative w-full h-44">
+            <Image
+              src={cert.image}
+              alt={cert.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 p-5 flex flex-col flex-1">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="relative w-6 h-6 rounded-full overflow-hidden border border-purple-500/30">
+                <Image
+                  src={cert.icon}
+                  alt={cert.issuer}
+                  fill
+                  className="object-cover"
+                  sizes="24px"
+                />
+              </div>
+              <p className="text-purple-300/80 text-xs font-semibold tracking-wide">
+                {cert.issuer}
+              </p>
+            </div>
+            <p className="text-white/40 text-xs">{cert.date}</p>
+          </div>
+
+          <h3 className="cert-title text-white font-bold text-[15px] leading-snug mb-2">
+            {cert.title}
+          </h3>
+
+          <p className="text-white/30 text-[11px] font-mono tracking-wider mb-4">
+            ID: {cert.credentialId}
+          </p>
+
+          <div className="cert-tags flex flex-wrap gap-1.5 mt-auto">
+            {cert.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-[3px] rounded-md text-[10px] font-semibold bg-white/[0.03] border border-white/[0.08] text-cyan-300/70"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="cert-verify mt-3 flex items-center gap-2 text-purple-400/70">
+            <span className="text-xs font-medium">Verify Certificate</span>
+            <FaExternalLinkAlt className="w-3 h-3" />
+          </div>
+        </div>
+      </div>
+    </motion.a>
+  );
+}
 
