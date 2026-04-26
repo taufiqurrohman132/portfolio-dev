@@ -1,15 +1,22 @@
 import type { Variants } from "framer-motion";
 
-// Check for reduced motion preference
-const prefersReducedMotion = typeof window !== "undefined"
-  ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  : false;
+// Dynamic checks — called at runtime, not module load
+const getPrefersReducedMotion = () =>
+  typeof window !== "undefined"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
 
-// Text Variant motion - using tween for smoother performance
+const getIsMobile = () =>
+  typeof window !== "undefined" ? window.innerWidth < 768 : false;
+
+// Text Variant motion — lighter on mobile
 export const textVariant = (delay?: number): Variants => {
+  const isMobile = getIsMobile();
+  const reduced = getPrefersReducedMotion();
+
   return {
     hidden: {
-      y: -30,
+      y: isMobile ? -10 : -20,
       opacity: 0,
     },
     show: {
@@ -17,7 +24,7 @@ export const textVariant = (delay?: number): Variants => {
       opacity: 1,
       transition: {
         type: "tween",
-        duration: prefersReducedMotion ? 0.3 : 0.8,
+        duration: reduced ? 0.3 : isMobile ? 0.4 : 0.6,
         delay: delay,
         ease: "easeOut",
       },
@@ -25,17 +32,21 @@ export const textVariant = (delay?: number): Variants => {
   };
 };
 
-// FadeIn motion - defaults to tween for better performance
+// FadeIn motion — transform + opacity only, no spring
 export const fadeIn = (
   direction: "left" | "right" | "up" | "down" | undefined,
-  type: "decay" | "spring" | "keyframes" | "tween" | "inertia" | undefined,
+  _type: "decay" | "spring" | "keyframes" | "tween" | "inertia" | undefined,
   delay: number,
   duration: number
 ): Variants => {
+  const isMobile = getIsMobile();
+  const reduced = getPrefersReducedMotion();
+  const distance = isMobile ? 20 : 40;
+
   return {
     hidden: {
-      x: direction === "left" ? 60 : direction === "right" ? -60 : 0,
-      y: direction === "up" ? 60 : direction === "down" ? -60 : 0,
+      x: direction === "left" ? distance : direction === "right" ? -distance : 0,
+      y: direction === "up" ? distance : direction === "down" ? -distance : 0,
       opacity: 0,
     },
     show: {
@@ -43,20 +54,22 @@ export const fadeIn = (
       y: 0,
       opacity: 1,
       transition: {
-        type: type === "spring" ? "tween" : type,
+        type: "tween",
         delay: delay,
-        duration: prefersReducedMotion ? 0.3 : duration,
+        duration: reduced ? 0.3 : isMobile ? Math.min(duration, 0.6) : duration,
         ease: "easeOut",
       },
     },
   };
 };
 
-// zoom in motion
+// Zoom in motion
 export const zoomIn = (delay: number, duration: number): Variants => {
+  const reduced = getPrefersReducedMotion();
+
   return {
     hidden: {
-      scale: 0.9,
+      scale: 0.95,
       opacity: 0,
     },
     show: {
@@ -65,20 +78,22 @@ export const zoomIn = (delay: number, duration: number): Variants => {
       transition: {
         type: "tween",
         delay: delay,
-        duration: prefersReducedMotion ? 0.3 : duration,
+        duration: reduced ? 0.3 : duration,
         ease: "easeOut",
       },
     },
   };
 };
 
-// slide in motion
+// Slide in motion
 export const slideIn = (
   direction: "left" | "right" | "up" | "down" | undefined,
-  type: "decay" | "spring" | "keyframes" | "tween" | "inertia" | undefined,
+  _type: "decay" | "spring" | "keyframes" | "tween" | "inertia" | undefined,
   delay: number,
   duration: number
 ): Variants => {
+  const reduced = getPrefersReducedMotion();
+
   return {
     hidden: {
       x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
@@ -88,25 +103,32 @@ export const slideIn = (
       x: 0,
       y: 0,
       transition: {
-        type: type === "spring" ? "tween" : type,
+        type: "tween",
         delay: delay,
-        duration: prefersReducedMotion ? 0.3 : duration,
+        duration: reduced ? 0.3 : duration,
         ease: "easeOut",
       },
     },
   };
 };
 
-// staggered container motion
+// Staggered container motion
 export const staggerContainer = (
   staggerChildren?: number,
   delayChildren?: number
 ): Variants => {
+  const isMobile = getIsMobile();
+  const reduced = getPrefersReducedMotion();
+
   return {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: prefersReducedMotion ? 0.05 : staggerChildren,
+        staggerChildren: reduced
+          ? 0.05
+          : isMobile
+            ? 0.06
+            : staggerChildren,
         delayChildren: delayChildren || 0,
       },
     },

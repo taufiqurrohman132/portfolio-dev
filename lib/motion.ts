@@ -1,39 +1,54 @@
+const getIsMobile = () =>
+  typeof window !== "undefined" ? window.innerWidth < 768 : false;
+
+const getDistance = () => (getIsMobile() ? 30 : 60);
+const getDuration = () => (getIsMobile() ? 0.35 : 0.5);
+
 export function slideInFromLeft(delay: number) {
+  const distance = getDistance();
+  const duration = getDuration();
+
   return {
-    hidden: { x: -100, opacity: 0 },
+    hidden: { x: -distance, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
       transition: {
         delay: delay,
-        duration: 0.5,
+        duration: duration,
+        ease: "easeOut",
       },
     },
   };
 }
 
 export function slideInFromRight(delay: number) {
+  const distance = getDistance();
+  const duration = getDuration();
+
   return {
-    hidden: { x: 100, opacity: 0 },
+    hidden: { x: distance, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
       transition: {
         delay: delay,
-        duration: 0.5,
+        duration: duration,
+        ease: "easeOut",
       },
     },
   };
 }
 
 export const slideInFromTop = {
-  hidden: { y: -100, opacity: 0 },
+  hidden: { y: -getDistance(), opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      delay: 0.5,
-      duration: 0.5,
+      delay: getIsMobile() ? 0.15 : 0.4,
+      duration: getDuration(),
+      ease: "easeOut",
     },
   },
 };

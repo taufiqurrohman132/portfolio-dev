@@ -1,43 +1,39 @@
-# Performance Optimization TODO
+# Optimization TODO: Home & About Sections
 
-## Phase 1: Global CSS & Layout Optimizations ✅
-- [x] Optimize `app/globals.css` - Add GPU helpers, reduce-motion media query, content-visibility
-- [x] Optimize `app/layout.tsx` - Add antialiased class for smoother text rendering
+## Plan
+- [x] Analyze files and create optimization plan
+- [x] Get user approval
 
-## Phase 2: Heavy Animation Components ✅
-- [x] Optimize `components/main/star-background.tsx` - Already had particle reduction (1200/600)
-- [x] Optimize `components/main/about.tsx` - Disable 3D tilt on mobile, reduce blur, fix video preload
-- [x] Optimize `components/ui/3d-pin.tsx` - Replace 3 infinite motion loops with single CSS animation
+## Phase 1: Critical — Star Background (Biggest Impact)
+- [x] Update `components/main/star-background.tsx` — disable on mobile, reduce particles to 600, cap DPR to 1.5, add `gl={{ antialias: false }}`
+- [x] Update `app/layout.tsx` — StarsCanvas handles mobile internally (returns null on mobile)
 
-## Phase 3: Interactive Components ✅
-- [x] Optimize `components/sub/certificate-card.tsx` - Debounce mouse handlers, remove heavy effects
-- [x] Optimize `components/main/experience.tsx` - Replace spring hover with CSS, throttle mouse move
+## Phase 2: About Section — Remove Heavy Effects
+- [x] Update `components/main/about.tsx` — major overhaul:
+  - [x] Removed orbiting icons component entirely
+  - [x] Static gradient border (no CSS spin animation)
+  - [x] Simplified TiltCard (stiffness 50, damping 15, rotation 1.5deg)
+  - [x] Removed background video from About section
+  - [x] Removed large blur glows on mobile, reduced on desktop (blur-[40px])
+  - [x] Reduced backdrop-filter intensity (2xl→md)
+  - [x] Simplified floating badge — static div on mobile, motion.div only on desktop
+  - [x] Mobile: skip motion variants, use simple fade-in-up
+  - [x] Added useCallback for mouse handlers to prevent re-renders
+  - [x] Social buttons: CSS transitions only, removed will-change
 
-## Phase 4: Video & Media ✅
-- [x] Optimize `components/main/hero.tsx` - Fix preload="metadata", add playsInline
-- [x] Optimize `components/main/skills.tsx` - Fix video preload, add gpu-layer
-- [x] Optimize `components/main/about.tsx` - Fix video preload
+## Phase 3: Hero Section — Reduce Rerenders
+- [x] Update `components/sub/hero-content.tsx` — wider stagger delays, explicit will-change on motion.divs, inline-block on Link
+- [x] Keep `components/main/hero.tsx` as-is (already optimized with mobile gradient)
 
-## Phase 5: Motion Utilities ✅
-- [x] Optimize `src/utils/motion.ts` - Prefer tween over spring, respect reduced-motion
+## Phase 4: Motion Utilities — Fix Static Checks
+- [x] Update `src/utils/motion.ts` — dynamic `getIsMobile()` / `getPrefersReducedMotion()`, reduced distances (20/40), cap duration on mobile
+- [x] Update `lib/motion.ts` — dynamic `getIsMobile()`, reduced distances (30/60), shorter durations
 
-## Phase 6: Testing & Polish ⏳
-- [ ] Run build to verify no errors
-- [ ] Test scroll smoothness
-- [ ] Verify mobile performance
+## Phase 5: CSS — Mobile Performance Utilities
+- [x] Update `app/globals.css` — disable backdrop-filter/blur on mobile, reduce heavy shadows, simplify gpu-layer on mobile
 
-## Summary of Changes
-
-### Performance Improvements:
-1. **GPU Layering**: Added `.gpu-layer` class with `translateZ(0)` and `will-change` for composited layers
-2. **Reduced Motion**: Added `prefers-reduced-motion` media query support
-3. **Mobile Optimizations**: Disabled heavy blur/glow effects on mobile (<768px)
-4. **Video Preload**: Fixed invalid `preload="false"` to `preload="metadata"`
-5. **3D Tilt**: Disabled on mobile (window width < 1024), reduced stiffness on desktop
-6. **Mouse Handlers**: Added requestAnimationFrame throttling to certificate and experience cards
-7. **Backdrop Blur**: Reduced from `blur-2xl`/`blur-[120px]` to `blur-[80px]`/`blur-[100px]`
-8. **Framer Motion**: Replaced heavy spring animations with lighter tween animations
-9. **3D Pin**: Replaced 3 infinite framer-motion loops with single CSS `pulse-slow` animation
-10. **Experience Cards**: Replaced spring whileHover with CSS transitions
-11. **Certificate Cards**: Removed expensive SVG noise filter, reduced backdrop-blur layers
+## Phase 6: Verify
+- [x] Build project — SUCCESS
+- [x] Check for TypeScript errors — NONE (only pre-existing warning in experience.tsx)
+- [x] Verify no broken design — PASSED
 
