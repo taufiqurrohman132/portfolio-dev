@@ -46,9 +46,12 @@ export const HeroContent = ({ isMobile = false }: HeroContentProps) => {
         {/* Heading */}
         <motion.div
           variants={slideInFromLeft(delayHeading)}
-          className="flex flex-col gap-6 mt-6 text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
+          className="flex flex-col gap-3 mt-6 text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
           style={{ willChange: "transform, opacity" }}
         >
+          <span className="text-sm md:text-base font-normal text-gray-300">
+            👋Hi i&apos;am Taufiqur Rohman
+          </span>
           <span>
             Building scalable{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">

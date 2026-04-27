@@ -224,21 +224,21 @@ export const RECENT_PROJECTS = [
     link: "https://github.com/taufiqurrohman132/story-android",
     sourceCode: "https://github.com/taufiqurrohman132/story-android",
   },
-  {
-    id: 2,
-    title: "Fintrack - Personal Finance App",
-    des: "A personal finance tracking app with transaction management, categories, and analytics built using MVVM architecture.",
-    img: "/projects/fintrack.png",
-    iconLists: [
-      "/skills/kotlin.png",
-      "/skills/room.png",
-      "/skills/datastore.png",
-      "/skills/hilt.png",
-      "/skills/android.png"
-    ],
-    link: "https://github.com/taufiqurrohman132/finance-tracker-android",
-    sourceCode: "https://github.com/taufiqurrohman132/finance-tracker-android",
-  },
+  // {
+  //   id: 2,
+  //   title: "Fintrack - Personal Finance App",
+  //   des: "A personal finance tracking app with transaction management, categories, and analytics built using MVVM architecture.",
+  //   img: "/projects/fintrack.png",
+  //   iconLists: [
+  //     "/skills/kotlin.png",
+  //     "/skills/room.png",
+  //     "/skills/datastore.png",
+  //     "/skills/hilt.png",
+  //     "/skills/android.png"
+  //   ],
+  //   link: "https://github.com/taufiqurrohman132/finance-tracker-android",
+  //   sourceCode: "https://github.com/taufiqurrohman132/finance-tracker-android",
+  // },
   {
     id: 3,
     title: "Event Discovery App",
