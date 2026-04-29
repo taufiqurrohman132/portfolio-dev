@@ -304,7 +304,7 @@ export const About = () => {
                     variants={isMobile ? undefined : fadeIn("left", "tween", 0.5, 0.8)}
                     className="text-gray-300/90 leading-[1.8] text-[15px] md:text-[17px] "
                   >
-                    I'm <span className="text-purple-300 font-semibold">Taufiq</span>, an{" "}
+                    I&apos;m <span className="text-purple-300 font-semibold">Taufiq</span>, an{" "}
                     <span className="text-purple-300 font-semibold">Android Developer</span>{" "}
                     student specializing in building Kotlin-based Android applications with clean
                     architecture and modern Jetpack stack. I completed the{" "}
