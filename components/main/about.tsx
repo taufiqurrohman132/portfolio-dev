@@ -302,18 +302,23 @@ export const About = () => {
                   {/* Description */}
                   <motion.p
                     variants={isMobile ? undefined : fadeIn("left", "tween", 0.5, 0.8)}
-                    className="text-gray-300/90 leading-[1.8] text-[15px] md:text-[17px] max-w-xl"
+                    className="text-gray-300/90 leading-[1.8] text-[15px] md:text-[17px] "
                   >
-                    I craft high-performance mobile applications with a focus on
-                    clean architecture and exceptional user experiences.
-                    Specializing in{" "}
-                    <span className="text-purple-300 font-semibold">
-                      Android development
-                    </span>{" "}
-                    with Kotlin & Jetpack Compose, I build scalable apps using
-                    MVVM, Clean Architecture, and modern Android best practices.
-                    Passionate about creating impactful digital solutions that
-                    make a difference.
+                    I'm <span className="text-purple-300 font-semibold">Taufiq</span>, an{" "}
+                    <span className="text-purple-300 font-semibold">Android Developer</span>{" "}
+                    student specializing in building Kotlin-based Android applications with clean
+                    architecture and modern Jetpack stack. I completed the{" "}
+                    <span className="text-purple-300 font-semibold">IDCamp Expert-level scholarship</span>{" "}
+                    by <span className="text-purple-300 font-semibold">Indosat</span> — a competitive
+                    multi-stage program — where I built an offline-first social app using Paging 3,
+                    RemoteMediator, and Google Maps integration.
+
+                    <span className="block mt-4">
+                      I also gained real-world experience through an internship, working in a
+                      professional team environment. Currently building a personal finance app,
+                      and actively looking for opportunities to grow as a professional{" "}
+                      <span className="text-purple-300 font-semibold">Android Developer</span>.
+                    </span>
                   </motion.p>
 
                   {/* Skill Tags */}
@@ -330,11 +335,11 @@ export const About = () => {
                   <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-2" />
 
                   {/* Stats */}
-                  <div className="flex flex-wrap justify-center lg:justify-start gap-8 md:gap-12">
+                  {/* <div className="flex flex-wrap justify-center lg:justify-start gap-8 md:gap-12">
                     <StatItem end={2} suffix="+" label="Years Experience" isMobile={isMobile} isInView={isInView} />
                     <StatItem end={5} suffix="+" label="Projects Built" isMobile={isMobile} isInView={isInView} />
                     <StatItem end={10} suffix="+" label="Technologies" isMobile={isMobile} isInView={isInView} />
-                  </div>
+                  </div> */}
 
                   {/* Social Links & CTA */}
                   <motion.div
