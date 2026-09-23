@@ -14,42 +14,51 @@ export const RecentProjects = () => {
       </h1>
 
       <div className=" flex flex-wrap items-center justify-center gap-x-24 gap-y-8 p-4 ">
-        {RECENT_PROJECTS.map(
-          ({ id, des, iconLists, img, link, sourceCode, title }) => (
+        {RECENT_PROJECTS.map(({ id, des, iconLists, img, title }) => (
             <div
               key={id}
               className="flex h-[32rem] w-[90vw] items-center justify-center sm:h-[41rem] sm:w-[570px] lg:min-h-[32.5rem] "
             >
-              <PinContainer title="Visit" href={link}>
-                <div className="relative mb-10 flex h-[30vh] w-[80vw] items-center justify-center overflow-hidden sm:h-[40vh] sm:w-[570px] ">
-                  <div className="relative h-full w-full overflow-hidden bg-[#13162d] lg:rounded-3xl">
+              <PinContainer
+                title="View Details"
+                href={`/projects/${id}`}
+                external={false}
+              >
+                <Link
+                  href={`/projects/${id}`}
+                  className="block"
+                  aria-label={`View details of ${title}`}
+                >
+                  <div className="relative mb-10 flex h-[30vh] w-[80vw] items-center justify-center overflow-hidden sm:h-[40vh] sm:w-[570px] ">
+                    <div className="relative h-full w-full overflow-hidden bg-[#13162d] lg:rounded-3xl">
+                      <Image
+                        height={330}
+                        width={552}
+                        src="/bg.png"
+                        alt="bg-img"
+                      />
+                    </div>
+
                     <Image
-                      height={330}
-                      width={552}
-                      src="/bg.png"
-                      alt="bg-img"
+                      height={300}
+                      width={464}
+                      src={img}
+                      alt={title}
+                      className="absolute bottom-0 z-10"
                     />
                   </div>
 
-                  <Image
-                    height={300}
-                    width={464}
-                    src={img}
-                    alt={title}
-                    className="absolute bottom-0 z-10"
-                  />
-                </div>
+                  <div className=" text-white">
 
-                <div className=" text-white">
+                    <h1 className="line-clamp-1 text-base font-bold md:text-xl lg:text-2xl">
+                      {title}
+                    </h1>
 
-                  <h1 className="line-clamp-1 text-base font-bold md:text-xl lg:text-2xl">
-                    {title}
-                  </h1>
-
-                  <p className="line-clamp-2 text-sm font-light lg:text-xl lg:font-normal">
-                    {des}
-                  </p>
-                </div>
+                    <p className="line-clamp-2 text-sm font-light lg:text-xl lg:font-normal">
+                      {des}
+                    </p>
+                  </div>
+                </Link>
 
                 <div className="mb-3 mt-7 flex items-center justify-between">
                   <div className="flex items-center">
@@ -74,12 +83,10 @@ export const RecentProjects = () => {
 
                   <div className="flex items-center justify-center">
                     <Link
-                      href={sourceCode}
-                      target="_blank"
-                      rel="noreferrer noopener"
+                      href={`/projects/${id}`}
                       className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 md:text-xs lg:text-xl"
                     >
-                      Source Code
+                      View Details
                     </Link>
 
                     <FaLocationArrow className="ms-3 " color="hsl(264, 100%, 50%)" />
@@ -87,8 +94,7 @@ export const RecentProjects = () => {
                 </div>
               </PinContainer>
             </div>
-          )
-        )}
+          ))}
       </div>
     </section>
   );

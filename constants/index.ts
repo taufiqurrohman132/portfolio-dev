@@ -209,7 +209,33 @@ export const gridItems = [
   },
 ] as const;
 
-export const RECENT_PROJECTS = [
+export type Project = {
+  id: number;
+  title: string;
+  des: string;
+  img: string;
+  iconLists: string[];
+  /** Live demo / external URL. Leave empty (or equal to sourceCode) to render the demo button as disabled. */
+  link?: string | null;
+  /** Source repository URL. When empty, the "Source Code" button renders as disabled. */
+  sourceCode?: string | null;
+  /**
+   * Device frame used by the detail-page carousel:
+   * "web" → laptop frame (1 slide), "mobile" → phone-frame coverflow (3 visible).
+   * Defaults to "mobile".
+   */
+  platform?: "web" | "mobile";
+  role?: string;
+  year?: string;
+  overview?: string;
+  highlights?: string[];
+  /** Screenshots shown in the detail page carousel. Falls back to `img` when empty. */
+  screenshots?: string[];
+  /** Fallback tech topics shown when GitHub live data is unavailable. */
+  tags?: string[];
+};
+
+export const RECENT_PROJECTS: Project[] = [
   {
     id: 1,
     title: "Social Story App - Android",
@@ -223,6 +249,19 @@ export const RECENT_PROJECTS = [
     ],
     link: "https://github.com/taufiqurrohman132/story-android",
     sourceCode: "https://github.com/taufiqurrohman132/story-android",
+    platform: "mobile",
+    role: "Android Developer",
+    year: "2025",
+    overview:
+      "A social storytelling client built as the final project for the IDCamp Android expert track. It ships 10+ core requirements — from authentication and story submission with camera and location, to an offline-first feed that stays smooth on unreliable networks. The codebase follows modern Android conventions end to end, so it reads like a production app rather than a tutorial sample.",
+    highlights: [
+      "Offline-first feed using Paging 3 + RemoteMediator backed by a Room cache",
+      "Clean MVVM architecture with a repository layer and structured error handling",
+      "Camera, location, and runtime permission flows following Android 13+ guidelines",
+      "Unit tests and Espresso UI tests covering the critical user journeys",
+    ],
+    screenshots: ["/projects/p-sosial-story.png"],
+    tags: ["android", "kotlin", "offline-first", "mvvm"],
   },
   // {
   //   id: 2,
@@ -247,9 +286,22 @@ export const RECENT_PROJECTS = [
     iconLists: [
       "/skills/mobile/kotlin.svg",
       "/skills/mobile/glide.png",
-     ],
+    ],
     link: "https://github.com/taufiqurrohman132/dicoding-event-android",
     sourceCode: "https://github.com/taufiqurrohman132/dicoding-event-android",
+    platform: "mobile",
+    role: "Android Developer",
+    year: "2025",
+    overview:
+      "An event discovery app built for Dicoding's intermediate Android program. It combines real-time search with favorites and a caching strategy that cut data retrieval time by more than half compared to a network-only implementation.",
+    highlights: [
+      "Debounced real-time search with response caching to avoid repeat network calls",
+      "52% faster data retrieval through Retrofit integration + local caching",
+      "Favorites and detail views persisted locally for a seamless experience",
+      "MVVM with Coroutines/Flow, styled with Material Design components",
+    ],
+    screenshots: ["/projects/p-event-dicoding.png"],
+    tags: ["android", "kotlin", "retrofit", "caching"],
   },
   {
     id: 4,
@@ -259,12 +311,76 @@ export const RECENT_PROJECTS = [
     iconLists: [
       "/skills/mobile/Dart.svg",
       "/skills/mobile/Flutter.svg",
-     ],
+    ],
     link: "https://github.com/taufiqurrohman132/tasky-note-flutter",
     sourceCode: "https://github.com/taufiqurrohman132/tasky-note-flutter",
+    platform: "mobile",
+    role: "Flutter Developer",
+    year: "2024",
+    overview:
+      "A lightweight Flutter to-do app created for the Creating Flutter Apps for Beginners certification, and the first portfolio piece I used when applying for entry-level mobile roles. It focuses on a clean, interactive list experience with a Material-inspired UI.",
+    highlights: [
+      "Interactive to-do list with add, complete, and delete flows",
+      "Material-inspired Flutter UI that scales across phone and tablet sizes",
+      "Local persistence so tasks survive app restarts",
+      "Structured to be extended — a solid base for adding sync and notifications later",
+    ],
+    screenshots: ["/projects/p-todo.png"],
+    tags: ["flutter", "dart", "material-design"],
   },
+  {
+    id: 5,
+    title: "Cafelion POS – Sistem Manajemen Kafe",
+    des: "Aplikasi web point-of-sale dan manajemen kafe all-in-one: dashboard owner, transaksi kasir, kitchen queue, recipe costing (HPP & margin), inventory, hingga kontrol akses multi-role.",
+    img: "/projects/cafelion-web/02-dashboard-owner.webp",
+    iconLists: ["/skills/next.png", "/skills/tailwind.png"],
+    // URL live demo menyusul — isi di sini agar tombol Live Demo aktif.
+    link: null,
+    // Repo private — biarkan null agar tombol Source Code tampil disabled.
+    sourceCode: null,
+    platform: "web",
+    role: "Full-stack Web Developer",
+    year: "2026",
+    overview:
+      "Cafelion POS adalah aplikasi web untuk mengoperasikan kafe dalam satu sistem — dari sisi kasir (POS, transaksi, kitchen queue), pekerjaan back-office (katalog menu, promo & bundling, recipe costing dengan HPP dan analisis margin, inventory, purchase order, supplier), sampai pandangan pemilik (pendapatan, estimasi laba bersih, rata-rata tiket, tren penjualan, target harian, dan alert stok rendah). Sistemnya berjalan multi-role — owner, admin, cashier, kitchen — dengan izin akses per modul, plus laporan bisnis dan analisis AOV untuk pengambilan keputusan.",
+    highlights: [
+      "Dashboard owner: pendapatan, estimasi laba bersih, rata-rata tiket, tren penjualan, dan goal harian",
+      "Alur pesanan lengkap: Point of Sale → Riwayat Transaksi → Kitchen Queue",
+      "Recipe costing dengan HPP, margin kotor, dan simulator What-If perubahan harga bahan",
+      "Inventory, purchase order, dan supplier management dengan alert stok rendah serta saran restock",
+      "Role-based access control: owner, admin, cashier, kitchen — izin per modul (view/create/edit/delete/export)",
+      "Promo & bundling, katalog menu, laporan bisnis, dan analisis AOV serta target",
+    ],
+    screenshots: [
+      "/projects/cafelion-web/01-login.webp",
+      "/projects/cafelion-web/02-dashboard-owner.webp",
+      "/projects/cafelion-web/03-point-of-sale.webp",
+      "/projects/cafelion-web/04-transactions.webp",
+      "/projects/cafelion-web/05-kitchen-queue.webp",
+      "/projects/cafelion-web/06-menu-catalog.webp",
+      "/projects/cafelion-web/07-promo-bundling.webp",
+      "/projects/cafelion-web/08-recipe-costing.webp",
+      "/projects/cafelion-web/09-inventory.webp",
+      "/projects/cafelion-web/10-purchase-order.webp",
+      "/projects/cafelion-web/11-supplier.webp",
+      "/projects/cafelion-web/12-reports.webp",
+      "/projects/cafelion-web/13-user-directory.webp",
+      "/projects/cafelion-web/14-roles-permissions.webp",
+    ],
+    tags: ["nextjs", "tailwind", "pos", "web-app"],
+  },
+];
 
-] as const;
+export const getProjectById = (
+  id: string | number
+): Project | undefined =>
+  RECENT_PROJECTS.find((project) => String(project.id) === String(id));
+
+/** Images for the detail carousel — falls back to the project thumbnail. */
+export const getScreenshots = (project: Project): string[] =>
+  project.screenshots && project.screenshots.length > 0
+    ? project.screenshots
+    : [project.img];
 
 export const PROJECTS = [
   {
@@ -457,19 +573,19 @@ export const CERTIFICATES = [
 export const NAV_LINKS = [
   {
     title: "About me",
-    link: "#about-me",
+    link: "/#about-me",
   },
   {
     title: "Skills",
-    link: "#skills",
+    link: "/#skills",
   },
   {
     title: "Projects",
-    link: "#projects",
+    link: "/#projects",
   },
   {
     title: "Certificates",
-    link: "#certificates",
+    link: "/#certificates",
   },
 ] as const;
 

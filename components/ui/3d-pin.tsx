@@ -9,12 +9,15 @@ export const PinContainer = ({
   children,
   title,
   href,
+  external = true,
   className,
   containerClassName,
 }: {
   children: React.ReactNode;
   title?: string;
   href?: string;
+  /** false = internal route (no new tab) */
+  external?: boolean;
   className?: string;
   containerClassName?: string;
 }) => {
@@ -54,7 +57,7 @@ export const PinContainer = ({
           <div className={cn(" relative z-50 ", className)}>{children}</div>
         </div>
       </div>
-      <PinPerspective title={title} href={href} />
+      <PinPerspective title={title} href={href} external={external} />
     </div>
   );
 };
@@ -62,9 +65,11 @@ export const PinContainer = ({
 export const PinPerspective = ({
   title,
   href,
+  external = true,
 }: {
   title?: string;
   href?: string;
+  external?: boolean;
 }) => {
   return (
     <div className="z-[60] flex h-80 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100">
@@ -72,7 +77,8 @@ export const PinPerspective = ({
         <div className="absolute inset-x-0 top-0 flex justify-center">
           <Link
             href={href || ""}
-            target="_blank"
+            target={external ? "_blank" : undefined}
+            rel={external ? "noreferrer noopener" : undefined}
             className="relative z-10 flex items-center space-x-2 rounded-full bg-zinc-950 px-4 py-0.5 ring-1 ring-white/10"
           >
             <span className="relative z-20 inline-block py-0.5 text-xs font-bold text-white">
