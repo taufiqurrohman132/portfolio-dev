@@ -10,8 +10,10 @@ import { Skills } from "@/components/main/skills";
 export default function Home() {
   return (
     <main className="h-full w-full">
-      <div className="flex flex-col gap-20">
-        <Hero />
+      <div className="flex flex-col gap-10">
+         <div className="-mt-24">
+      <Hero />
+    </div>
         <Skills />
         <About />
         {/* <Encryption /> */}

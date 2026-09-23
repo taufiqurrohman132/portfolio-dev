@@ -41,16 +41,19 @@ export const Hero = () => {
     <div ref={sectionRef} className="relative flex flex-col h-full w-full">
       {/* Desktop: video background | Mobile: lightweight gradient */}
       {!isMobile ? (
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="rotate-180 -scale-y-100 absolute top-[-340px] left-0 w-full h-full object-cover -z-20 gpu-layer"
-        >
-          <source src="/videos/blackhole.webm" type="video/webm" />
-        </video>
+       <video
+  ref={videoRef}
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  className="absolute top-[-300px] left-0 w-full h-full object-cover -z-20 gpu-layer"
+  style={{
+    transform: "scaleY(-1)",
+  }}
+>
+  <source src="/videos/blackhole.webm" type="video/webm" />
+</video>
       ) : (
         <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#0a0a1a] via-[#030014] to-[#030014]" />
       )}
