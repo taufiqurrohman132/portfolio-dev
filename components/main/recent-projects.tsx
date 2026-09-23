@@ -13,11 +13,12 @@ export const RecentProjects = () => {
         <span className="uppercase font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500"> recent projects</span>
       </h1>
 
-      <div className=" flex flex-wrap items-center justify-center gap-x-24 gap-y-4 p-4 ">
+      {/* gap-y-2 + wrapper setinggi card (calc vh + konten) supaya jarak antar card rapat & konstan di semua ukuran layar */}
+      <div className=" flex flex-wrap items-center justify-center gap-x-24 gap-y-2 p-4 ">
         {RECENT_PROJECTS.map(({ id, des, iconLists, img, title }) => (
             <div
               key={id}
-              className="flex h-[32rem] w-[90vw] items-center justify-center sm:h-[41rem] sm:w-[570px] lg:min-h-[32.5rem] "
+              className="flex h-[calc(30vh_+_14rem)] w-[90vw] items-center justify-center sm:h-[calc(40vh_+_14rem)] sm:w-[570px] lg:h-[calc(40vh_+_19rem)]"
             >
               <PinContainer
                 title="View Details"
