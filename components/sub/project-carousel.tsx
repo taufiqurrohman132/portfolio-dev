@@ -50,12 +50,12 @@ export const ProjectCarousel = ({ project }: ProjectCarouselProps) => {
   return (
     <section
       aria-label="Project screenshots"
-      className="mt-10 flex flex-col items-center"
+      className="mt-10 flex flex-col items-stretch"
     >
       {/* -------- Mobile project: coverflow of phone frames (3 visible) -------- */}
       {!isWeb && (
       <motion.div
-        className="relative -mx-6 h-[420px] w-full overflow-hidden"
+        className="relative -mx-6 h-[420px] overflow-hidden"
         drag={showControls ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.12}
@@ -113,7 +113,7 @@ export const ProjectCarousel = ({ project }: ProjectCarouselProps) => {
       {/* -------- Web project: coverflow of laptop frames (3 visible) -------- */}
       {isWeb && (
         <motion.div
-          className="relative -mx-6 h-[300px] w-full overflow-hidden sm:h-[440px] md:-mx-10 md:h-[530px]"
+          className="relative -mx-6 h-[300px] overflow-hidden sm:h-[440px] md:-mx-10 md:h-[530px]"
           drag={showControls ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.12}
@@ -169,9 +169,9 @@ export const ProjectCarousel = ({ project }: ProjectCarouselProps) => {
         </motion.div>
       )}
 
-      {/* ---------------- Controls: arrows + dots + counter ---------------- */}
+      {/* Controls — flex-wrap mencegah overflow di layar sempit saat dot banyak */}
       {showControls && (
-        <div className="mt-6 flex items-center justify-center gap-5">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-x-5">
           <button
             type="button"
             aria-label="Previous screenshot"

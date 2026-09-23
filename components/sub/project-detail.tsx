@@ -144,7 +144,10 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
           </span>
         )}
 
-        <h1 className="heading text-white">{project.title}</h1>
+        {/* Ukuran responsif: text-3xl di layar kecil, mengikuti .heading mulai sm */}
+        <h1 className="text-center text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          {project.title}
+        </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-sm text-white/60 lg:text-lg">
           {project.des}
