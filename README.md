@@ -75,7 +75,7 @@ space-portfolio/
     |-- projects/
     |-- skills/
     |-- videos/
-    |-- hero-bg.svg
+    |-- hero-bg-new.png
     |-- lock-main.png
     |-- lock-top.png
     |-- logo.png

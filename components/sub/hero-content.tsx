@@ -77,7 +77,7 @@ export const HeroContent = ({ isMobile = false }: HeroContentProps) => {
         </motion.div>
       </div>
 
-      {/* Desktop only: SVG illustration with lazy loading */}
+      {/* Desktop only: illustration with lazy loading */}
       {!isMobile && (
         <motion.div
           variants={slideInFromRight(delayImage)}
@@ -85,9 +85,9 @@ export const HeroContent = ({ isMobile = false }: HeroContentProps) => {
           style={{ willChange: "transform, opacity" }}
         >
           <Image
-            src="/hero-bg.svg"
-            alt="work icons"
-            height={650}
+            src="/hero-bg-new.png"
+            alt="tech stack icons"
+            height={681}
             width={650}
             draggable={false}
             className="select-none"
