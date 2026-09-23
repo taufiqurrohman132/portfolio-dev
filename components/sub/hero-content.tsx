@@ -91,8 +91,7 @@ export const HeroContent = ({ isMobile = false }: HeroContentProps) => {
             width={650}
             draggable={false}
             className="select-none"
-            loading="lazy"
-            priority={false}
+            priority
           />
         </motion.div>
       )}

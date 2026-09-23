@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useRef, type ComponentType, type MouseEvent } from "react";
 
 type VerticalTimelineElementProps = any; // sementara (biar jalan dulu)
@@ -67,9 +68,11 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       iconStyle={{ background: experience.iconBg }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
-          <img
+          <Image
             src={experience.icon.src}
             alt={experience.company_name}
+            width={experience.icon.width}
+            height={experience.icon.height}
             className="w-full h-full object-cover rounded-full"
           />
         </div>

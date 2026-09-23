@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 import { SkillDataProvider } from "@/components/sub/skill-data-provider";
 import { SkillText } from "@/components/sub/skill-text";
 
@@ -10,6 +14,27 @@ import {
 } from "@/constants";
 
 export const Skills = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Play hanya saat section terlihat, pause saat off-screen
+  // (hemat ~638 KB bandwidth & CPU decode yang tadinya jalan terus dari awal)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="skills"
@@ -86,12 +111,12 @@ export const Skills = () => {
       <div className="w-full h-full absolute">
         <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-cover">
           <video
+            ref={videoRef}
             className="w-full h-auto gpu-layer"
-            preload="metadata"
+            preload="none"
             playsInline
             loop
             muted
-            autoPlay
           >
             <source src="/videos/skills-bg.webm" type="video/webm" />
           </video>

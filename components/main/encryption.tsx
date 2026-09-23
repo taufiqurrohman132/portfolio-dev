@@ -2,10 +2,32 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 import { slideInFromTop } from "@/lib/motion";
 
 export const Encryption = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Play hanya saat section terlihat, pause saat off-screen
+  // (hemat ~812 KB bandwidth & CPU decode yang tadinya jalan terus dari awal)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="flex flex-row relative items-center justify-center min-h-screen w-full h-full -z-20">
       <div className="absolute w-auto h-auto top-0 z-[5]">
@@ -52,11 +74,11 @@ export const Encryption = () => {
 
       <div className="w-full flex items-start justify-center absolute">
         <video
+          ref={videoRef}
           loop
           muted
-          autoPlay
           playsInline
-          preload="false"
+          preload="none"
           className="w-full h-auto"
         >
           <source src="/videos/encryption-bg.webm" type="video/webm" />

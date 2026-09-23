@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Font Cedarville Cursive di-host sendiri lewat next/font (lihat app/layout.tsx) */
 .cursive {
-  font-family: "Cedarville Cursive", cursive;
+  font-family: var(--font-cedarville), "Cedarville Cursive", cursive;
 }
 .Welcome-text {
   background: linear-gradient(
