@@ -19,23 +19,31 @@ export const MagicButton = ({
 }: MagicButtonProps) => {
   return (
     <button
+      type="button"
       className={cn(
-        "relative inline-flex h-12 w-full overflow-hidden rounded-lg p-[1px] focus:outline-none md:w-60",
+        "group relative isolate inline-flex h-12 w-full max-w-full overflow-hidden rounded-lg p-px text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60 md:w-60",
         !asChild && ""
       )}
       onClick={handleClick}
       tabIndex={asChild ? -1 : undefined}
     >
-      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-[-1000%] z-0 animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"
+      />
       <span
         className={cn(
-          "inline-flex h-full w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl",
+          "relative z-10 inline-flex h-full w-full min-w-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl",
           otherClasses
         )}
       >
-        {position === "left" && icon}
-        {title}
-        {position === "right" && icon}
+        {position === "left" && icon && (
+          <span className="shrink-0">{icon}</span>
+        )}
+        <span className="min-w-0 truncate">{title}</span>
+        {position === "right" && icon && (
+          <span className="shrink-0">{icon}</span>
+        )}
       </span>
     </button>
   );
