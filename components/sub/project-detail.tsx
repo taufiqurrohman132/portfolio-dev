@@ -390,35 +390,35 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
         </motion.aside>
       </div>
 
-      {/* Prev / next */}
-      <nav className="mt-16 flex items-stretch justify-between gap-4 border-t border-white/[0.06] pt-8">
-        {prev ? (
+      {/* Prev / next — dua kolom equal di mobile, card penuh jika hanya satu arah. */}
+      <nav className="mt-16 grid grid-cols-2 gap-3 border-t border-white/[0.06] pt-8 sm:flex sm:items-stretch sm:justify-between sm:gap-4">
+        {prev && (
           <Link
             href={`/projects/${prev.id}`}
-            className="group flex max-w-[45%] flex-col items-start gap-1 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 transition hover:border-purple-500/40 hover:bg-purple-500/[0.06]"
+            aria-label={`Previous project: ${prev.title}`}
+            className={`group flex min-w-0 flex-col items-start gap-1.5 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-3 py-3.5 transition hover:border-purple-500/40 hover:bg-purple-500/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60 active:scale-[0.98] sm:max-w-[45%] sm:px-5 sm:py-4 ${!next ? "col-span-2" : ""}`}
           >
-            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/35">
+            <span className="flex items-center gap-2 whitespace-nowrap text-[9px] font-bold uppercase tracking-widest text-white/35 sm:text-[10px]">
               <FaArrowLeft className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" />
               Previous
             </span>
-            <span className="truncate text-sm font-bold text-white/80 group-hover:text-cyan-300">
+            <span className="line-clamp-2 min-w-0 text-xs font-bold leading-snug text-white/80 group-hover:text-cyan-300 sm:truncate sm:text-sm">
               {prev.title}
             </span>
           </Link>
-        ) : (
-          <span />
         )}
 
         {next && (
           <Link
             href={`/projects/${next.id}`}
-            className="group flex max-w-[45%] flex-col items-end gap-1 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-right transition hover:border-cyan-500/40 hover:bg-cyan-500/[0.06]"
+            aria-label={`Next project: ${next.title}`}
+            className={`group flex min-w-0 flex-col items-end gap-1.5 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-3 py-3.5 text-right transition hover:border-cyan-500/40 hover:bg-cyan-500/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 active:scale-[0.98] sm:ml-auto sm:max-w-[45%] sm:px-5 sm:py-4 ${!prev ? "col-span-2" : ""}`}
           >
-            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/35">
+            <span className="flex items-center gap-2 whitespace-nowrap text-[9px] font-bold uppercase tracking-widest text-white/35 sm:text-[10px]">
               Next
               <FaArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
-            <span className="truncate text-sm font-bold text-white/80 group-hover:text-cyan-300">
+            <span className="line-clamp-2 min-w-0 text-xs font-bold leading-snug text-white/80 group-hover:text-cyan-300 sm:truncate sm:text-sm">
               {next.title}
             </span>
           </Link>

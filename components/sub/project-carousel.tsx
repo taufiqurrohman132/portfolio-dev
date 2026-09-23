@@ -169,28 +169,76 @@ export const ProjectCarousel = ({ project }: ProjectCarouselProps) => {
         </motion.div>
       )}
 
-      {/* Controls — flex-wrap mencegah overflow di layar sempit saat dot banyak */}
+      {/* Controls — touch-friendly di mobile; dot penuh tetap digunakan di desktop. */}
       {showControls && (
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-x-5">
+        <div className="mt-5 flex w-full items-center gap-2.5 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-2 sm:mt-6 sm:w-auto sm:flex-none sm:gap-4 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0">
           <button
             type="button"
             aria-label="Previous screenshot"
             onClick={() => step(-1)}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition hover:border-purple-500/50 hover:bg-purple-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60"
+            className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition duration-200 hover:border-purple-500/50 hover:bg-purple-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60 active:scale-95 sm:h-12 sm:w-12"
           >
-            <FaArrowLeft className="h-5 w-5" />
+            <FaArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
 
-          <div className="flex items-center gap-2">
+          {/* Mobile: indikator ringkas agar jumlah screenshot banyak tidak membungkus/overflow. */}
+          <div className="flex min-w-0 flex-1 flex-col items-center gap-2 sm:hidden">
+            {count <= 5 ? (
+              <div className="flex max-w-full items-center justify-center gap-1.5">
+                {screenshots.map((src, i) => (
+                  <button
+                    key={`${src}-mobile-dot-${i}`}
+                    type="button"
+                    aria-label={`Go to screenshot ${i + 1}`}
+                    aria-current={i === current}
+                    onClick={() => goTo(i)}
+                    className={cn(
+                      "h-2 touch-manipulation rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60",
+                      i === current
+                        ? "w-5 bg-gradient-to-r from-purple-500 to-cyan-500"
+                        : "w-2 bg-white/20 hover:bg-white/40"
+                    )}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div
+                role="progressbar"
+                aria-label="Carousel progress"
+                aria-valuemin={1}
+                aria-valuemax={count}
+                aria-valuenow={current + 1}
+                aria-valuetext={`${current + 1} of ${count}`}
+                className="h-1.5 w-full max-w-40 overflow-hidden rounded-full bg-white/10"
+              >
+                <span
+                  className="block h-full rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 transition-[width] duration-300"
+                  style={{ width: `max(8px, ${((current + 1) / count) * 100}%)` }}
+                />
+              </div>
+            )}
+
+            <span
+              aria-live="polite"
+              className="text-[11px] font-medium tabular-nums text-white/40"
+            >
+              <span className="text-white/80">{String(current + 1).padStart(2, "0")}</span>
+              <span className="mx-1 text-white/20">/</span>
+              {String(count).padStart(2, "0")}
+            </span>
+          </div>
+
+          {/* Desktop: semua dot tetap bisa dipilih langsung. */}
+          <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 sm:flex">
             {screenshots.map((src, i) => (
               <button
-                key={`${src}-dot-${i}`}
+                key={`${src}-desktop-dot-${i}`}
                 type="button"
                 aria-label={`Go to screenshot ${i + 1}`}
                 aria-current={i === current}
                 onClick={() => goTo(i)}
                 className={cn(
-                  "h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60",
+                  "h-2 touch-manipulation rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60",
                   i === current
                     ? "w-6 bg-gradient-to-r from-purple-500 to-cyan-500"
                     : "w-2 bg-white/20 hover:bg-white/40"
@@ -203,12 +251,12 @@ export const ProjectCarousel = ({ project }: ProjectCarouselProps) => {
             type="button"
             aria-label="Next screenshot"
             onClick={() => step(1)}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition hover:border-cyan-500/50 hover:bg-cyan-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
+            className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition duration-200 hover:border-cyan-500/50 hover:bg-cyan-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 active:scale-95 sm:h-12 sm:w-12"
           >
-            <FaArrowRight className="h-5 w-5" />
+            <FaArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
 
-          <span className="text-xs tabular-nums text-white/40">
+          <span className="hidden w-12 text-xs tabular-nums text-white/40 sm:inline-flex">
             {current + 1} / {count}
           </span>
         </div>

@@ -228,7 +228,7 @@ export const About = () => {
                       />
                       <div className="relative w-full h-full rounded-[calc(2rem-3px)] overflow-hidden bg-[#0a0a1a]">
                         <Image
-                          src="/profile/profile.png"
+                          src="/profile/profile.webp"
                           alt="Profile Photo"
                           fill
                           className="object-cover"
