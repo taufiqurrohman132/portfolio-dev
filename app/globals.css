@@ -66,6 +66,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ikon repository memakai gradient purple-cyan yang konsisten tanpa warna per ikon. */
+.repository-gradient-icon {
+  color: #c084fc;
+  -webkit-mask-image: linear-gradient(135deg, #c084fc 0%, #22d3ee 100%);
+  mask-image: linear-gradient(135deg, #c084fc 0%, #22d3ee 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
 /* Glass navbar tetap aktif di mobile tanpa ikut utility backdrop yang dinonaktifkan
    oleh optimasi mobile di bawah. */
 .navbar-glass {

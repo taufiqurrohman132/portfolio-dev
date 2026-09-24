@@ -41,11 +41,11 @@ const Stat = ({
   value: string;
 }) => (
   <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5 transition-colors duration-300 hover:border-purple-500/30 hover:bg-purple-500/[0.06]">
-    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-white/35">
-      {icon}
+    <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-white/50">
+      <span>{icon}</span>
       {label}
     </div>
-    <p className="mt-1 text-lg font-bold text-white">{value}</p>
+    <p className="mt-1.5 text-xl font-bold text-white">{value}</p>
   </div>
 );
 
@@ -58,12 +58,12 @@ const MetaRow = ({
   label: string;
   value: string;
 }) => (
-  <div className="flex items-center justify-between gap-3 text-xs">
-    <span className="flex items-center gap-2 text-white/40">
-      <span className="text-purple-400/70">{icon}</span>
+  <div className="flex items-center justify-between gap-3 text-sm">
+    <span className="flex items-center gap-2 text-white/50">
+      <span className="text-white/40">{icon}</span>
       {label}
     </span>
-    <span className="font-medium text-white/70">{value}</span>
+    <span className="font-medium text-white/75">{value}</span>
   </div>
 );
 
@@ -248,23 +248,23 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
 
             {/* Header + sync status */}
             <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-white">
-                <RxGithubLogo className="h-5 w-5" />
-                <span className="text-sm font-bold tracking-wide">Repository</span>
+              <div className="flex items-center gap-2.5 text-white">
+                <RxGithubLogo className="h-5 w-5 text-white" />
+                <span className="text-lg font-bold tracking-wide">Repository</span>
               </div>
 
               {!hasSource ? (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-white/40">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-semibold tracking-wide text-white/50">
                   <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
                   Not linked
                 </span>
               ) : hasLive ? (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-green-400/20 bg-green-400/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-green-300">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-green-400/20 bg-green-400/10 px-2.5 py-1 text-xs font-semibold tracking-wide text-green-300">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
                   Live sync
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-amber-300">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-1 text-xs font-semibold tracking-wide text-amber-300">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                   Static data
                 </span>
@@ -273,7 +273,7 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
 
             {!hasSource ? (
               <>
-                <p className="mt-4 text-xs leading-relaxed text-white/40">
+                <p className="mt-4 text-sm leading-relaxed text-white/50">
                   This project&apos;s repository is private, so live GitHub stats
                   aren&apos;t shown here.
                 </p>
@@ -284,7 +284,7 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                     {topics.slice(0, 8).map((topic) => (
                       <span
                         key={topic}
-                        className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1 text-[10px] font-bold text-cyan-300/60 transition-colors duration-300 hover:border-purple-500/30 hover:text-purple-300/80"
+                        className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-sm font-medium text-cyan-200/75 transition-colors duration-300 hover:border-purple-400/40 hover:bg-purple-400/10 hover:text-purple-200"
                       >
                         {topic}
                       </span>
@@ -297,24 +297,22 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                 {/* Stats */}
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <Stat
-                    icon={<FaStar className="h-3 w-3 text-yellow-400" />}
+                    icon={<FaStar className="repository-gradient-icon h-4 w-4" />}
                     label="Stars"
                     value={hasLive ? formatCount(repo.stars) : "—"}
                   />
                   <Stat
-                    icon={<FaCodeBranch className="h-3 w-3 text-purple-400" />}
+                    icon={<FaCodeBranch className="repository-gradient-icon h-4 w-4" />}
                     label="Forks"
                     value={hasLive ? formatCount(repo.forks) : "—"}
                   />
                   <Stat
-                    icon={<FaEye className="h-3 w-3 text-cyan-400" />}
+                    icon={<FaEye className="repository-gradient-icon h-4 w-4" />}
                     label="Watchers"
                     value={hasLive ? formatCount(repo.watchers) : "—"}
                   />
                   <Stat
-                    icon={
-                      <FaExclamationCircle className="h-3 w-3 text-pink-400" />
-                    }
+                    icon={<FaExclamationCircle className="repository-gradient-icon h-4 w-4" />}
                     label="Issues"
                     value={hasLive ? formatCount(repo.openIssues) : "—"}
                   />
@@ -323,27 +321,27 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                 {/* Meta */}
                 <div className="mt-5 space-y-2.5">
                   <MetaRow
-                    icon={<FaCode className="h-3 w-3" />}
+                    icon={<FaCode className="repository-gradient-icon h-4 w-4" />}
                     label="Language"
                     value={hasLive ? (repo.language ?? "—") : "—"}
                   />
                   <MetaRow
-                    icon={<FaBalanceScale className="h-3 w-3" />}
+                    icon={<FaBalanceScale className="repository-gradient-icon h-4 w-4" />}
                     label="License"
                     value={hasLive ? (repo.license ?? "—") : "—"}
                   />
                   <MetaRow
-                    icon={<FaHistory className="h-3 w-3" />}
+                    icon={<FaHistory className="repository-gradient-icon h-4 w-4" />}
                     label="Last push"
                     value={hasLive ? timeAgo(repo.lastPush) : "—"}
                   />
                   <MetaRow
-                    icon={<FaCodeBranch className="h-3 w-3" />}
+                    icon={<FaCodeBranch className="repository-gradient-icon h-4 w-4" />}
                     label="Default branch"
                     value={hasLive ? (repo.defaultBranch ?? "—") : "—"}
                   />
                   <MetaRow
-                    icon={<FaStar className="h-3 w-3" />}
+                    icon={<FaStar className="repository-gradient-icon h-4 w-4" />}
                     label="Repo size"
                     value={hasLive ? formatRepoSize(repo.sizeKb) : "—"}
                   />
@@ -355,7 +353,7 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                     {topics.slice(0, 8).map((topic) => (
                       <span
                         key={topic}
-                        className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1 text-[10px] font-bold text-cyan-300/60 transition-colors duration-300 hover:border-purple-500/30 hover:text-purple-300/80"
+                        className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-sm font-medium text-cyan-200/75 transition-colors duration-300 hover:border-purple-400/40 hover:bg-purple-400/10 hover:text-purple-200"
                       >
                         {topic}
                       </span>
@@ -364,11 +362,11 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                 )}
 
                 {hasLive ? (
-                  <p className="mt-4 text-[10px] text-white/30">
+                  <p className="mt-4 text-sm text-white/40">
                     Stats synced from GitHub · refreshes hourly
                   </p>
                 ) : (
-                  <p className="mt-4 text-[10px] text-white/30">
+                  <p className="mt-4 text-sm text-white/40">
                     Live sync unavailable — GitHub data will reload automatically.
                   </p>
                 )}
@@ -378,11 +376,11 @@ export const ProjectDetail = ({ project, repo }: ProjectDetailProps) => {
                   href={project.sourceCode as string}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.02] py-2.5 text-xs font-bold text-white/70 transition hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-white"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.02] py-3 text-sm font-bold text-white/70 transition hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-white"
                 >
-                  <RxGithubLogo className="h-4 w-4" />
+                  <RxGithubLogo className="h-4 w-4 text-white" />
                   {hasLive && repo.fullName ? repo.fullName : "Open repository"}
-                  <FaExternalLinkAlt className="h-3 w-3 opacity-60" />
+                  <FaExternalLinkAlt className="repository-gradient-icon h-4 w-4" />
                 </Link>
               </>
             )}
